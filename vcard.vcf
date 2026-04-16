@@ -1,0 +1,21 @@
+BEGIN:VCARD
+VERSION:3.0
+PRODID:-//Digital Business Card//EN
+FN:Saif Zaman
+N:Zaman;Saif;;;
+ORG:Shilpokart
+TITLE:Managing Director
+TEL;TYPE=CELL,VOICE:+880-1704-292402
+EMAIL;TYPE=INTERNET,PREF:saif.mektek@gmail.com
+URL:https://www.shilpokart.com
+ADR;TYPE=WORK:;;Dhaka;;;Bangladesh
+X-WECHAT:saif-zaman
+IMPP;X-SERVICE-TYPE=WeChat:xmpp:saif-zaman
+X-WHATSAPP:+8801704292402
+LANG:en
+LANG:zh
+NOTE:Met at Canton Fair 2025 - Guangzhou
+CATEGORIES:Business,Canton Fair
+REV:20250417T000000Z
+UID:saif-zaman-cantonfair-2025
+END:VCARD

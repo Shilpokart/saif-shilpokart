@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Saif Zaman | Digital Business Card</title>
+    <meta name="description" content="Digital business card for Canton Fair 2026">
+    <meta property="og:title" content="Saif Zaman - Digital Business Card">
+    <meta property="og:description" content="Let's connect! Scan to save my contact.">
+    <meta property="og:type" content="website">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --accent: #e94560;
+            --bg: #f5f5f5;
+            --card-bg: #ffffff;
+            --text: #333333;
+            --text-light: #666666;
+            --wechat-green: #07C160;
+            --whatsapp-green: #25D366;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+            max-width: 420px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        /* Header */
+        .card-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #16213e 100%);
+            color: white;
+            padding: 32px 24px;
+            text-align: center;
+            position: relative;
+        }
+
+        .avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--accent);
+            margin: 0 auto 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            border: 3px solid rgba(255,255,255,0.3);
+        }
+
+        .card-header h1 {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .card-header .company {
+            font-size: 14px;
+            opacity: 0.85;
+        }
+
+        .card-header .title-en {
+            font-size: 13px;
+            opacity: 0.7;
+            margin-top: 2px;
+        }
+
+        /* Language Toggle */
+        .lang-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            margin-top: 16px;
+        }
+
+        .lang-btn {
+            padding: 4px 16px;
+            border: 1px solid rgba(255,255,255,0.3);
+            background: transparent;
+            color: white;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .lang-btn:first-child {
+            border-radius: 4px 0 0 4px;
+        }
+
+        .lang-btn:last-child {
+            border-radius: 0 4px 4px 0;
+        }
+
+        .lang-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* Contact Info */
+        .card-body {
+            padding: 24px;
+        }
+
+        .section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: var(--text-light);
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+            margin-top: 20px;
+        }
+
+        .section-title:first-child {
+            margin-top: 0;
+        }
+
+        .contact-row {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .contact-row:last-child {
+            border-bottom: none;
+        }
+
+        .contact-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            margin-right: 12px;
+            flex-shrink: 0;
+        }
+
+        .icon-phone { background: #e8f5e9; color: #2e7d32; }
+        .icon-email { background: #e3f2fd; color: #1565c0; }
+        .icon-wechat { background: #e8f5e9; color: var(--wechat-green); }
+        .icon-whatsapp { background: #e8f5e9; color: var(--whatsapp-green); }
+        .icon-web { background: #f3e5f5; color: #7b1fa2; }
+        .icon-location { background: #fff3e0; color: #e65100; }
+
+        .contact-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .contact-label {
+            font-size: 11px;
+            color: var(--text-light);
+        }
+
+        .contact-value {
+            font-size: 14px;
+            font-weight: 500;
+            word-break: break-all;
+        }
+
+        .contact-action {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            color: white;
+            flex-shrink: 0;
+            margin-left: 8px;
+        }
+
+        .btn-wechat { background: var(--wechat-green); }
+        .btn-whatsapp { background: var(--whatsapp-green); }
+        .btn-copy { background: var(--primary); }
+        .btn-phone { background: #2e7d32; }
+        .btn-email { background: #1565c0; }
+
+        .contact-action:active {
+            opacity: 0.8;
+        }
+
+        /* WeChat QR Section */
+        .wechat-qr-section {
+            text-align: center;
+            padding: 20px 24px;
+            background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+            border-top: 1px solid #c8e6c9;
+        }
+
+        .wechat-qr-section h3 {
+            color: #2e7d32;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+
+        .wechat-qr-section .subtitle {
+            color: #558b2f;
+            font-size: 13px;
+            margin-bottom: 16px;
+        }
+
+        .qr-placeholder {
+            width: 200px;
+            height: 200px;
+            background: white;
+            border-radius: 12px;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #a5d6a7;
+            position: relative;
+        }
+
+        .qr-placeholder img {
+            width: 180px;
+            height: 180px;
+            border-radius: 8px;
+        }
+
+        .qr-placeholder .placeholder-text {
+            color: #81c784;
+            font-size: 13px;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .wechat-tip {
+            font-size: 12px;
+            color: #689f38;
+            margin-top: 8px;
+        }
+
+        /* Save Contact Button */
+        .save-contact-section {
+            padding: 20px 24px;
+            text-align: center;
+        }
+
+        .btn-save {
+            display: inline-block;
+            padding: 14px 32px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        .btn-save:active {
+            background: #c73550;
+        }
+
+        .btn-save svg {
+            vertical-align: middle;
+            margin-right: 8px;
+        }
+
+        /* Chinese Section (shown when CN active) */
+        .cn-only { display: none; }
+        .en-only { display: block; }
+
+        body.lang-cn .cn-only { display: block; }
+        body.lang-cn .en-only { display: none; }
+
+        /* Footer */
+        .card-footer {
+            padding: 16px 24px;
+            text-align: center;
+            font-size: 11px;
+            color: var(--text-light);
+            border-top: 1px solid #f0f0f0;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--primary);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 14px;
+            z-index: 1000;
+            transition: transform 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 360px) {
+            .card-header { padding: 24px 16px; }
+            .card-body { padding: 16px; }
+            .contact-value { font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <!-- Header -->
+        <div class="card-header">
+            <div class="avatar">S</div>
+            <div class="en-only">
+                <h1>Saif Zaman</h1>
+                <div class="company">Shilpokart</div>
+                <div class="title-en">Managing Director</div>
+            </div>
+            <div class="cn-only">
+                <h1>Saif Zaman</h1>
+                <div class="company">Shilpokart (希尔普卡)</div>
+                <div class="title-en">Managing Director / 董事总经理</div>
+            </div>
+            <div class="lang-toggle">
+                <button class="lang-btn active" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" onclick="setLang('cn')">中文</button>
+            </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="card-body">
+            <div class="section-title en-only">Contact</div>
+            <div class="section-title cn-only">联系方式</div>
+
+            <!-- Phone -->
+            <div class="contact-row">
+                <div class="contact-icon icon-phone">&#9742;</div>
+                <div class="contact-info">
+                    <div class="contact-label en-only">Phone</div>
+                    <div class="contact-label cn-only">电话</div>
+                    <div class="contact-value">+880-1704-292402</div>
+                </div>
+                <button class="contact-action btn-copy" onclick="copyText('+880-1704-292402')">Copy</button>
+            </div>
+
+            <!-- Email -->
+            <div class="contact-row">
+                <div class="contact-icon icon-email">&#9993;</div>
+                <div class="contact-info">
+                    <div class="contact-label">Email</div>
+                    <div class="contact-value">saif.mektek@gmail.com</div>
+                </div>
+                <button class="contact-action btn-copy" onclick="copyText('saif.mektek@gmail.com')">Copy</button>
+            </div>
+
+            <!-- WeChat -->
+            <div class="contact-row">
+                <div class="contact-icon icon-wechat">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-7.062-6.122zM14.033 13.33c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.97-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.97-.982z"/>
+                    </svg>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-label">WeChat / 微信</div>
+                    <div class="contact-value">saif-zaman</div>
+                </div>
+                <button class="contact-action btn-wechat" onclick="copyText('saif-zaman')">Copy</button>
+            </div>
+
+            <!-- WhatsApp -->
+            <div class="contact-row">
+                <div class="contact-icon icon-whatsapp">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+                    </svg>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-label">WhatsApp</div>
+                    <div class="contact-value">+880-1704-292402</div>
+                </div>
+                <a class="contact-action btn-whatsapp" href="https://wa.me/8801704292402" target="_blank">Chat</a>
+            </div>
+
+            <!-- Website -->
+            <div class="contact-row">
+                <div class="contact-icon icon-web">&#127760;</div>
+                <div class="contact-info">
+                    <div class="contact-label en-only">Website</div>
+                    <div class="contact-label cn-only">网站</div>
+                    <div class="contact-value">www.shilpokart.com</div>
+                </div>
+                <a class="contact-action btn-copy" href="https://www.shilpokart.com" target="_blank">Visit</a>
+            </div>
+
+            <!-- Location -->
+            <div class="contact-row">
+                <div class="contact-icon icon-location">&#9873;</div>
+                <div class="contact-info">
+                    <div class="contact-label en-only">Location</div>
+                    <div class="contact-label cn-only">地址</div>
+                    <div class="contact-value en-only">Dhaka, Bangladesh</div>
+                    <div class="contact-value cn-only">孟加拉国 达卡</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WeChat QR Section -->
+        <div class="wechat-qr-section">
+            <h3 class="en-only">Scan to Add on WeChat</h3>
+            <h3 class="cn-only">扫码加微信</h3>
+            <div class="subtitle en-only">Open WeChat → Discover → Scan</div>
+            <div class="subtitle cn-only">打开微信 → 发现 → 扫一扫</div>
+            <div class="qr-placeholder">
+                <!-- Replace with your actual WeChat QR code image -->
+                <img src="wechat-qr.png" alt="WeChat QR Code" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div class="placeholder-text" style="display:none;">
+                    WeChat QR Code<br>
+                    <small>Place your wechat-qr.png here</small>
+                </div>
+            </div>
+            <div class="wechat-tip en-only">Or search WeChat ID: <strong>saif-zaman</strong></div>
+            <div class="wechat-tip cn-only">或搜索微信号: <strong>saif-zaman</strong></div>
+        </div>
+
+        <!-- Save Contact -->
+        <div class="save-contact-section">
+            <a class="btn-save" href="vcard.vcf" download="Saif_Zaman_Contact.vcf">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                    <polyline points="17 21 17 13 7 13 7 21"/>
+                    <polyline points="7 3 7 8 15 8"/>
+                </svg>
+                <span class="en-only">Save Contact</span>
+                <span class="cn-only">保存联系人</span>
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <div class="card-footer">
+            <div class="en-only">Canton Fair 2026 | Guangzhou, China</div>
+            <div class="cn-only">2026年广交会 | 中国广州</div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // Language toggle
+        function setLang(lang) {
+            if (lang === 'cn') {
+                document.body.classList.add('lang-cn');
+            } else {
+                document.body.classList.remove('lang-cn');
+            }
+            document.querySelectorAll('.lang-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', (i === 0 && lang === 'en') || (i === 1 && lang === 'cn'));
+            });
+        }
+
+        // Copy to clipboard
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showToast('Copied! / 已复制!');
+            }).catch(() => {
+                // Fallback
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                document.body.appendChild(ta);
+                ta.select();
+                document.execCommand('copy');
+                document.body.removeChild(ta);
+                showToast('Copied! / 已复制!');
+            });
+        }
+
+        // Toast notification
+        function showToast(msg) {
+            const toast = document.getElementById('toast');
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2000);
+        }
+    </script>
+</body>
+</html>
